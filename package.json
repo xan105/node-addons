@@ -9,7 +9,7 @@
     "node": ">=16.0.0"
   },
   "bin": {
-    "node-gyp-load": "./lib/bin/preload.js"
+    "node-gyp-load": "./lib/preload.js"
   },
   "scripts": {
     "lint": "npx eslint --ignore-path .gitignore ./**/*.{js,mjs}"
