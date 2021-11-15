@@ -48,7 +48,7 @@ Add `node-gyp-load` as an install script to your native project
 }
 ```
 
-Prebuild(s) are expected to be found in the "prebuilds" folder.<br />
+Prebuild(s) are expected to be found in the `prebuilds` folder.<br />
 Organized in subfolders "platform-arch"<br />
 Filename should end with ".napi.node".<br />
 And as the name suggests be a n-api native addon.<br />
