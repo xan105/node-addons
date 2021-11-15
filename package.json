@@ -8,9 +8,7 @@
   "engines": {
     "node": ">=16.0.0"
   },
-  "bin": {
-    "node-gyp-load": "./lib/bin/node-gyp-load"
-  },
+  "bin": "./lib/bin/node-gyp-load",
   "scripts": {
     "lint": "npx eslint --ignore-path .gitignore ./**/*.{js,mjs}"
   },
