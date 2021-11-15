@@ -1,0 +1,44 @@
+{
+  "name": "@xan105/gyp-load",
+  "version": "0.0.1",
+  "description": "Simple native module bindings (.node) ESM loader with prebuild support",
+  "type": "module",
+  "exports": "./lib/esm.js",
+  "types": "./types/esm.d.ts",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "bin": {
+    "node-gyp-load": "./lib/bin/node-gyp-load"
+  },
+  "scripts": {
+    "lint": "npx eslint --ignore-path .gitignore ./**/*.{js,mjs}"
+  },
+  "keywords": [
+    "node-gyp",
+    "prebuild",
+    "native-module",
+    "bindings"
+  ],
+  "author": {
+    "name": "Anthony Beaumont",
+    "email": "dev.xan105@outlook.be",
+    "url": "https://xan105.com/"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xan105/node-gyp-load.git"
+  },
+  "bugs": {
+    "url": "https://github.com/xan105/node-gyp-load/issues"
+  },
+  "homepage": "https://github.com/xan105/node-gyp-load#readme",
+  "devDependencies": {
+    "eslint": "^8.1.0"
+  },
+  "dependencies": {
+    "@xan105/fs": "^2.0.0",
+    "fast-glob": "^3.2.7"
+  }
+}
