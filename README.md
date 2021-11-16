@@ -60,7 +60,7 @@ MODULE_PATH/
     -win32-x64/
       -targetname.napi.node
       -targetname2.napi.node
-    -win32-x86/
+    -win32-ia32/
       -targetname.napi.node
       -targetname2.napi.node
 ```
@@ -87,6 +87,8 @@ API
  |dir|string|"."|root dir where to search|
  |prebuild|bool|true|search the "prebuilds" folder or not|
 
-#### `load(bindings: string): any`
+#### `load(bindings: string, flag?: string): any`
 
-  Load given bindings path.
+  Load given bindings path.</br>
+  See [os.constants.dlopen](https://nodejs.org/api/os.html#dlopen%20constants) for flag (default "RTLD_LAZY").
+  

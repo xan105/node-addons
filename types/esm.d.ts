@@ -5,4 +5,4 @@ declare interface IOption{
 }
 
 export function find(option?: IOption): Promise<string>;
-export function load(bindings: string): any;
+export function load(bindings: string, flag?: string): any;
