@@ -1,7 +1,7 @@
 declare interface IOption{
   name?: string,
   dir?: string,
-  prebuild?: bool
+  prebuild?: boolean
 }
 
 export function find(option?: IOption): Promise<string>;
