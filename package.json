@@ -12,7 +12,7 @@
     "node-gyp-load": "./lib/preload.js"
   },
   "scripts": {
-    "lint": "npx eslint --ignore-path .gitignore ./**/*.{js,mjs}"
+    "lint": "npx eslint --ignore-path .gitignore \"./**/*.{js,mjs}\""
   },
   "keywords": [
     "node-gyp",
