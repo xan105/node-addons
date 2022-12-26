@@ -6,7 +6,8 @@
   "exports": "./lib/index.js",
   "types": "./types/index.d.ts",
   "engines": {
-    "node": ">=16.0.0"
+    "node": ">=16.0.0",
+    "npm": "~8.5.0"
   },
   "bin": {
     "node-gyp-load": "./lib/preload.js"
