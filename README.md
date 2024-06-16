@@ -56,7 +56,7 @@ Add `node-gyp-load` as an install script to your native project
 }
 ```
 
-Prebuild(s) are expected to be found in the `prebuilds` folder.<br />
+Prebuild(s) are expected to be found in the `prebuild` or `prebuilds` folder.<br />
 Organized in subfolders "platform-arch"<br />
 They should be n-api native addons with the `.node` file extension.
 
@@ -86,12 +86,12 @@ API
 
   Find your native module's .node file (bindings).
  
-  Options:
+  ⚙️ Options:
  
   |option|type|default|description|
   |------|----|-------|-----------|
-  |name|string|"bindings"|.node filename (node-gyp target name)|
-  |cwd|string|cwd|where to search (default to current working dir)|
+  |name|string|"bindings"|filename (node-gyp target name)|
+  |cwd|string|current|where to search|
 
 ### `load(bindings: string): unknown`
 
