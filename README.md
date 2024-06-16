@@ -97,6 +97,6 @@ API
 
   Load given bindings path.</br>
 
-### `dlopen(option?: object)`: Promise<unknown>`
+### `dlopen(option?: object): Promise<unknown>`
 
   Shorthand to perform `find()` + `load()` in a single call.
