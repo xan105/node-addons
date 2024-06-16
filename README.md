@@ -18,22 +18,30 @@ Usage
 
 ```js
 import { find, load } from "node-gyp-load";
-import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
 
 const bindings = await find({
-  name: "target_name", //node-gyp target name (without ext ".node")
-  dir: join(dirname(fileURLToPath(import.meta.url)),"../"), //root dir where to search. (default to ".") 
-  prebuild: true //search the folder "prebuilds" (see below for more details)
+  name: "target_name", //node-gyp target name
+  cwd: import.meta.dirname //where to search (default to current working dir).
 });
 
 const nativeModule = load(bindings);
-//or
-const { someFn, someFn2 } = load(bindings);
-
 nativeModule.someFn();
 //or
+const { someFn, someFn2 } = load(bindings);
 someFn();
+```
+
+Same but in a single call:
+
+```js
+import { dlopen } from "node-gyp-load";
+
+const { foo } = await dlopen({
+  name: "bar",
+  cwd: import.meta.dirname
+});
+
+foo();
 ```
 
 ## Prebuild
@@ -50,19 +58,18 @@ Add `node-gyp-load` as an install script to your native project
 
 Prebuild(s) are expected to be found in the `prebuilds` folder.<br />
 Organized in subfolders "platform-arch"<br />
-Filename should end with ".napi.node".<br />
-And as the name suggests be a n-api native addon.<br />
+They should be n-api native addons with the `.node` file extension.
 
 _Example:_
 ```
 MODULE_PATH/
   -prebuilds/
     -win32-x64/
-      -targetname.napi.node
-      -targetname2.napi.node
+      -targetname.node
+      -targetname2.node
     -win32-ia32/
-      -targetname.napi.node
-      -targetname2.napi.node
+      -targetname.node
+      -targetname2.node
 ```
 
 Install script will check for prebuild(s) before building your project with `node-gyp rebuild`.
@@ -75,20 +82,21 @@ API
 
 ## Named export
 
-#### `find(option?: obj): Promise<string>`
+### `find(option?: object): Promise<string>`
 
- Find your native module's .node file (bindings).
+  Find your native module's .node file (bindings).
  
- options:
+  Options:
  
- |option|type|default|description|
- |------|----|-------|-----------|
- |name|string|"bindings"|.node filename (node-gyp target name)|
- |dir|string|"."|root dir where to search|
- |prebuild|bool|true|search the "prebuilds" folder or not|
+  |option|type|default|description|
+  |------|----|-------|-----------|
+  |name|string|"bindings"|.node filename (node-gyp target name)|
+  |cwd|string|cwd|where to search (default to current working dir)|
 
-#### `load(bindings: string, flag?: string): any`
+### `load(bindings: string): unknown`
 
   Load given bindings path.</br>
-  See [os.constants.dlopen](https://nodejs.org/api/os.html#dlopen%20constants) for flag (default "RTLD_LAZY").
-  
+
+### `dlopen(option?: object)`: Promise<unknown>`
+
+  Shorthand to perform `find()` + `load()` in a single call.

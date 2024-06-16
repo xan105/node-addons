@@ -1,8 +1,8 @@
-declare interface IOption{
+declare interface Option{
   name?: string,
-  dir?: string,
-  prebuild?: boolean
+  cwd?: string
 }
 
-export function find(option?: IOption): Promise<string>;
-export function load(bindings: string, flag?: string): any;
+export function find(option?: Option): Promise<string>;
+export function load(bindings: string): unknow;
+export function dlopen(option?: Option): Promise<unknow>;
