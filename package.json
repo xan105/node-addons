@@ -1,6 +1,6 @@
 {
   "name": "node-gyp-load",
-  "version": "0.0.5",
+  "version": "1.0.0",
   "description": "Simple native module bindings (.node) ESM loader with prebuild support",
   "type": "module",
   "exports": {
