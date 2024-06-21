@@ -30,7 +30,9 @@
     "node-gyp",
     "prebuild",
     "native-module",
-    "bindings"
+    "bindings",
+    "n-api",
+    "addons"
   ],
   "author": {
     "name": "Anthony Beaumont",
@@ -71,6 +73,15 @@
   "dependencies": {
     "@xan105/error": "^1.7.1",
     "@xan105/fs": "^2.2.1",
-    "@xan105/is": "^2.9.3"
+    "@xan105/is": "^2.9.3",
+    "node-addon-api": "^8.0.0"
+  },
+  "peerDependencies": {
+    "node-gyp": "^10.1.0"
+  },
+  "peerDependenciesMeta": {
+    "node-gyp": {
+      "optional": true
+    }
   }
 }
