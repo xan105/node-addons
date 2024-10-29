@@ -19,7 +19,7 @@
     "npm": "^10.5.0"
   },
   "bin": {
-    "node-gyp-load": "lib/preload.js"
+    "node-gyp-load": "cli/preload.js"
   },
   "scripts": {
     "lint": "eslint \"./lib/**/*.{js,mjs}\" \"./types/**/*.d.ts\"",
