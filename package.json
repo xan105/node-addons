@@ -8,11 +8,11 @@
       "types": "./types/index.d.ts",
       "default": "./lib/index.js"
     },
-    "/napi": {
+    "./napi": {
       "types": "./types/napi.d.ts",
       "default": "./lib/napi.js"
     },
-    "/wasi": {
+    "./wasi": {
       "types": "./types/wasi.d.ts",
       "default": "./lib/wasi.js"
     }
