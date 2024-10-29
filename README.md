@@ -3,8 +3,8 @@ About
 
 Integrate native code into Node.js:
 
-- [N-API] Native addon module with prebuild support
-- [WASI] WebAssembly System Interface
+- [ N-API ] Native addon module with prebuild support
+- [ WASI ] WebAssembly System Interface
 
 This library helps dealing with finding and loading your bindings.
 
@@ -74,7 +74,7 @@ Find and load specified filePath based on its extention (.node, .wasm, ...).
 
 - When loading WASI addons, you can specify the WASI version with the option `version`.
 
-** ⚙️ Options **
+**⚙️ Options **
 
 + `cwd?: string` (current working dir)
 
@@ -92,7 +92,11 @@ Find and load specified filePath based on its extention (.node, .wasm, ...).
 
 ## NAPI Namespace
 
-### `find(module: string, cwd: string): { path: string, isPrebuild: boolean }`
+```js
+import ... from "@xan105/addons/napi"
+```
+
+### `find(module: string, cwd: string): Promise<{ path:string, isPrebuild: boolean }>`
 
 Find node bindings by searching in known locations such as `build/Release`, relative to the specified current working dir.
 
@@ -101,6 +105,10 @@ Find node bindings by searching in known locations such as `build/Release`, rela
 Load specified node bindings.
 
 ## WASI Namespace
+
+```js
+import ... from "@xan105/addons/wasi"
+```
 
 ### `const VERSION: string[]`
 
