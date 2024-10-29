@@ -4,5 +4,5 @@ declare interface Option{
 }
 
 export function find(option?: Option): Promise<string>;
-export function load(bindings: string): unknow;
-export function dlopen(option?: Option): Promise<unknow>;
+export function load(bindings: string): unknown;
+export function dlopen(option?: Option): Promise<unknown>;
