@@ -74,7 +74,7 @@ Find and load specified filePath based on its extention (.node, .wasm, ...).
 
 - When loading WASI addons, you can specify the WASI version with the option `version`.
 
-**⚙️ Options **
+⚙️ **Options **
 
 + `cwd?: string` (current working dir)
 
@@ -93,7 +93,7 @@ Find and load specified filePath based on its extention (.node, .wasm, ...).
 ## NAPI Namespace
 
 ```js
-import ... from "@xan105/addons/napi"
+import {} from "@xan105/addons/napi"
 ```
 
 ### `find(module: string, cwd: string): Promise<{ path:string, isPrebuild: boolean }>`
@@ -107,7 +107,7 @@ Load specified node bindings.
 ## WASI Namespace
 
 ```js
-import ... from "@xan105/addons/wasi"
+import {} from "@xan105/addons/wasi"
 ```
 
 ### `const VERSION: string[]`
