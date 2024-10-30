@@ -1,12 +1,14 @@
 About
 =====
 
-Integrate native code into Node.js:
+ESM loader to integrate native code into Node.js with prebuild support.
+
+This library helps dealing with finding and loading your bindings when using ESM.
+
+Currently supports:
 
 - [ N-API ] Native addon
 - [ WASI ] WebAssembly System Interface
-
-This library helps dealing with finding and loading your bindings. And includes prebuild support.
 
 📦 Scoped `@xan105` packages are for my own personal use but feel free to use them.
 
