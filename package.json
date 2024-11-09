@@ -1,6 +1,6 @@
 {
   "name": "@xan105/addons",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "ESM loader to integrate native code into Node.js with prebuild support",
   "type": "module",
   "exports": {
