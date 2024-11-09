@@ -1,38 +1,52 @@
 {
-  "name": "node-gyp-load",
-  "version": "1.1.1",
-  "description": "Simple native module bindings (.node) ESM loader with prebuild support",
+  "name": "@xan105/addons",
+  "version": "1.0.0",
+  "description": "ESM loader to integrate native code into Node.js with prebuild support",
   "type": "module",
   "exports": {
     ".": {
       "types": "./types/index.d.ts",
       "default": "./lib/index.js"
+    },
+    "./napi": {
+      "types": "./types/napi.d.ts",
+      "default": "./lib/napi.js"
+    },
+    "./wasi": {
+      "types": "./types/wasi.d.ts",
+      "default": "./lib/wasi.js"
     }
   },
   "types": "./types/index.d.ts",
   "files": [
+    "/cli",
     "/lib",
     "/types"
   ],
   "engines": {
-    "node": ">=20.12.2",
-    "npm": "^10.5.0"
+    "node": ">=22.11.0",
+    "npm": "^10.9.0"
   },
   "bin": {
-    "node-gyp-load": "cli/preload.js"
+    "addons": "cli/pre-gyp.js",
+    "node-gyp-load": "cli/pre-gyp.js"
   },
   "scripts": {
-    "lint": "eslint \"./lib/**/*.{js,mjs}\" \"./types/**/*.d.ts\"",
-    "check": "tsc --noemit --checkJs",
-    "declare": "tsc --declaration --emitDeclarationOnly --outDir \"./types\""
+    "lint": "biome lint",
+    "declare": "tsc --emitDeclarationOnly"
   },
   "keywords": [
-    "node-gyp",
+    "native",
+    "addons",
+    "module",
     "prebuild",
-    "native-module",
     "bindings",
+    "node-gyp",
+    "gyp",
     "n-api",
-    "addons"
+    "wasm",
+    "wasi",
+    "esm"
   ],
   "author": {
     "name": "Anthony Beaumont",
@@ -42,12 +56,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xan105/node-gyp-load.git"
+    "url": "git+https://github.com/xan105/node-addon.git"
   },
   "bugs": {
-    "url": "https://github.com/xan105/node-gyp-load/issues"
+    "url": "https://github.com/xan105/node-addon/issues"
   },
-  "homepage": "https://github.com/xan105/node-gyp-load#readme",
+  "homepage": "https://github.com/xan105/node-addond#readme",
   "funding": [
     {
       "type": "github",
@@ -62,26 +76,22 @@
       "url": "https://www.patreon.com/xan105"
     }
   ],
-  "devDependencies": {
-    "@eslint/js": "^9.5.0",
-    "@types/node": "^20.14.2",
-    "eslint": "^9.5.0",
-    "globals": "^15.5.0",
-    "typescript": "^5.4.5",
-    "typescript-eslint": "^8.0.0-alpha.30"
-  },
-  "dependencies": {
-    "@xan105/error": "^1.7.1",
-    "@xan105/fs": "^2.2.1",
-    "@xan105/is": "^2.9.3",
-    "node-addon-api": "^8.0.0"
-  },
   "peerDependencies": {
-    "node-gyp": ">=10.1.0"
+    "node-gyp": ">=10.2.0"
   },
   "peerDependenciesMeta": {
     "node-gyp": {
       "optional": true
     }
+  },
+  "dependencies": {
+    "@xan105/error": "^1.7.1",
+    "@xan105/fs": "^2.3.0",
+    "@xan105/is": "^2.10.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/node": "^22.8.1",
+    "typescript": "^5.6.3"
   }
 }

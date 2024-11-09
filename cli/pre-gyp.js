@@ -6,33 +6,30 @@ This source code is licensed under the MIT License
 found in the LICENSE file in the root directory of this source tree.
 */
 
+import { env, arch, platform, exit, cwd } from "node:process";
+import { glob } from "node:fs/promises";
 import { join } from "node:path";
 import { spawn } from "node:child_process";
-import { env, arch, platform, exit, cwd } from "node:process";
-import { ls } from "@xan105/fs";
-import { asStringNotEmpty } from "@xan105/is/opt";
 
-const targetArch = asStringNotEmpty(env.npm_config_arch) ?? arch;
+const targetArch = env.npm_config_arch || arch;
 
 async function hasPrebuild(){
-
-  const locations = ["prebuild", "prebuilds"];
+  const locations = [
+    "prebuild", 
+    "prebuilds"
+  ];
 
   for (const location of locations){
     const dirPath = join(cwd(), location, `${platform}-${targetArch}`);
-    
-    const files = await ls(dirPath, { 
-      ignore: { dir : true },
-      ext: ["node"]
-    });
-    
-    if (files.length > 0) return true;
+    for await (const entry of glob("*.node", { cwd: dirPath })){ //node20: experimental
+      return true;
+    }
   }
   return false;
 }
 
-//Exec
-if (env.npm_config_build_from_source === "true" || await hasPrebuild() === false) 
+const override = env.npm_config_build_from_source === "true";
+if (override || await hasPrebuild() === false)
 {
   const gyp = spawn("node-gyp", ["rebuild", "--arch", targetArch], { 
     cwd: cwd(), 

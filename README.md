@@ -1,64 +1,51 @@
 About
 =====
 
-**Very simple** native module bindings (.node) ESM loader with prebuild support.
+ESM loader to integrate native code into Node.js with prebuild support.
 
-Because already existing solutions are either 
-- too complex
-- involve 3rd party remote download location
-- do not support specifying bindings name (multiple targets in binding.gyp)
+This library helps dealing with finding and loading your bindings when using ESM.
 
-⚠️ You are probably better off using the battle-tested already existing solutions.
-This was for a very specific need and experimenting with package.json "bin" property.
+Currently supports:
 
-Usage
-=====
+- [ N-API ] Native addon
+- [ WASI ] WebAssembly System Interface
 
-## Find/Load bindings
+📦 Scoped `@xan105` packages are for my own personal use but feel free to use them.
 
-```js
-import { find, load } from "node-gyp-load";
+NB: This library was previously named [node-gyp-load](https://www.npmjs.com/package/node-gyp-load)
 
-const bindings = await find({
-  name: "target_name", //node-gyp target name
-  cwd: import.meta.dirname //where to search (default to current working dir).
-});
-
-const nativeModule = load(bindings);
-nativeModule.someFn();
-//or
-const { someFn, someFn2 } = load(bindings);
-someFn();
-```
-
-Same but in a single call:
+Example
+=======
 
 ```js
-import { dlopen } from "node-gyp-load";
+import { dlopen } from "@xan105/addons";
 
-const { foo } = await dlopen({
-  name: "bar",
+const { foo } = await dlopen("bar.node", {
   cwd: import.meta.dirname
 });
 
 foo();
 ```
 
-## Prebuild
+Prebuild (Node-gyp)
+===================
 
-Add `node-gyp-load` as an install script to your native project
+Add `addons` as an install script to your native project:
 
 ```json
 {
   "scripts": {
-    "install": "node-gyp-load"
+    "install": "addons"
   }
 }
 ```
 
-Prebuild(s) are expected to be found in the `prebuild` or `prebuilds` folder.<br />
-Organized in subfolders "platform-arch"<br />
-They should be n-api native addons with the `.node` file extension.
+Install script will check for prebuild(s) before building your project with `node-gyp rebuild`.<br />
+You can force compile by doing `npm install --build-from-source`
+
+Prebuild(s) are expected to be found in the `prebuild` or `prebuilds` folder;<br />
+Organized in subfolders "platform-arch".<br />
+They should be N-API native addons with the `.node` file extension.
 
 _Example:_
 ```
@@ -72,8 +59,7 @@ MODULE_PATH/
       -targetname2.node
 ```
 
-Install script will check for prebuild(s) before building your project with `node-gyp rebuild`.
-But you can force compile by doing `npm install --build-from-source`
+NB: Install script is also available with its old name `node-gyp-load` for backward compatibility.
 
 API
 ===
@@ -82,21 +68,54 @@ API
 
 ## Named export
 
-### `find(option?: object): Promise<string>`
+### `dlopen(filePath: string, option?: object): Promise<unknown>`
 
-  Find your native module's .node file (bindings).
- 
-  ⚙️ Options:
- 
-  |option|type|default|description|
-  |------|----|-------|-----------|
-  |name|string|"bindings"|filename (node-gyp target name)|
-  |cwd|string|current|where to search|
+Find and load specified addon based on its extention (.node, .wasm, ...).
 
-### `load(bindings: string): unknown`
+- When loading NAPI addons, if you only provide the bindings name (basename) this will automatically search the bindings in known locations such as `build/Release`, relative to the current working dir. You can change this directory using the `cwd` option.
 
-  Load given bindings path.</br>
+- When loading WASI addons, you can specify the WASI version with the option `version`.
 
-### `dlopen(option?: object): Promise<unknown>`
+⚙️ **Options**
 
-  Shorthand to perform `find()` + `load()` in a single call.
++ `cwd?: string` (current working dir)
+
+  Current working dir where the node bindings is searched for.
+
++ `version?: string` (preview1)
+
+  WASI version. Currently only `unstable` and `preview1` are available.
+
++ `integrity?: string` (none)
+
+  Verify the addon hash against specified Subresource Integrity (SRI) string (eg: sha384-base64...).
+  
+  In case of NAPI gyp compilation _(= no prebuild)_ this check is skipped.
+
+## NAPI Namespace
+
+```js
+import {} from "@xan105/addons/napi"
+```
+
+### `find(module: string, cwd: string): Promise<{ path:string, isPrebuild: boolean }>`
+
+Find node bindings by searching in known locations such as `build/Release`, relative to the specified current working dir.
+
+### `load(filePath: string): unknown`
+
+Load specified node bindings.
+
+## WASI Namespace
+
+```js
+import {} from "@xan105/addons/wasi"
+```
+
+### `const VERSION: string[]`
+
+WASI version available.
+
+### `load(filePath: string, version: string): Promise<unknown>`
+
+Load specified WASI addon.
