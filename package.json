@@ -1,6 +1,6 @@
 {
   "name": "@xan105/addons",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "ESM loader to integrate native code into Node.js with prebuild support",
   "type": "module",
   "exports": {
@@ -56,12 +56,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/xan105/node-addon.git"
+    "url": "git+https://github.com/xan105/node-addons.git"
   },
   "bugs": {
-    "url": "https://github.com/xan105/node-addon/issues"
+    "url": "https://github.com/xan105/node-addons/issues"
   },
-  "homepage": "https://github.com/xan105/node-addond#readme",
+  "homepage": "https://github.com/xan105/node-addons#readme",
   "funding": [
     {
       "type": "github",
