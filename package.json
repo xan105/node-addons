@@ -1,6 +1,6 @@
 {
   "name": "@xan105/addons",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "ESM loader to integrate native code into Node.js with prebuild support",
   "type": "module",
   "exports": {
@@ -24,8 +24,8 @@
     "/types"
   ],
   "engines": {
-    "node": ">=20.18.0",
-    "npm": "^10.8.2"
+    "node": ">=22.11.0",
+    "npm": "^10.9.0"
   },
   "bin": {
     "addons": "cli/pre-gyp.js",
@@ -77,7 +77,7 @@
     }
   ],
   "peerDependencies": {
-    "node-gyp": ">=10.1.0"
+    "node-gyp": ">=10.2.0"
   },
   "peerDependenciesMeta": {
     "node-gyp": {
