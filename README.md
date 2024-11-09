@@ -27,8 +27,10 @@ const { foo } = await dlopen("bar.node", {
 foo();
 ```
 
-Prebuild (Node-gyp)
-===================
+CLI
+===
+
+## Prebuild (node-gyp)
 
 Add `addons` as an install script to your native project:
 
@@ -60,6 +62,22 @@ MODULE_PATH/
 ```
 
 NB: Install script is also available with its old name `node-gyp-load` for backward compatibility.
+
+## SRI
+
+This library API has an option to verify hash integrity using Subresource Integrity (SRI) string.
+
+As such there is a convenience script named `addons-sri` to generate hash for every `.node` or `.wasm` files in the current working dir _(excluding node_modules)_.
+
+```json
+{
+  "scripts": {
+    "sri": "addons-sri --algo sha384"
+  }
+}
+```
+
+You can specify the algo hash through the `--algo` argument; if omitted it defaults to `sha384`.
 
 API
 ===

@@ -29,7 +29,8 @@
   },
   "bin": {
     "addons": "cli/pre-gyp.js",
-    "node-gyp-load": "cli/pre-gyp.js"
+    "node-gyp-load": "cli/pre-gyp.js",
+    "addons-sri": "cli/sri.js"
   },
   "scripts": {
     "lint": "biome lint",
