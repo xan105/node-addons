@@ -7,9 +7,10 @@ found in the LICENSE file in the root directory of this source tree.
 */
 
 import { env, arch, platform, exit, cwd } from "node:process";
-import { glob } from "node:fs/promises";
 import { join } from "node:path";
 import { spawn } from "node:child_process";
+//import { glob } from "node:fs/promises";
+import { ls } from "@xan105/fs";
 
 const targetArch = env.npm_config_arch || arch;
 
@@ -21,9 +22,14 @@ async function hasPrebuild(){
 
   for (const location of locations){
     const dirPath = join(cwd(), location, `${platform}-${targetArch}`);
-    for await (const entry of glob("*.node", { cwd: dirPath })){ //node20: experimental
+    /*for await (const entry of glob("*.node", { cwd: dirPath })){ //node20: experimental
       return true;
-    }
+    }*/
+    const files = await ls(dirPath, { 
+      ignore: { dir : true },
+      ext: ["node"]
+    });
+    if (files.length > 0) return true;
   }
   return false;
 }

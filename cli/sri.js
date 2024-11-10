@@ -8,15 +8,23 @@ found in the LICENSE file in the root directory of this source tree.
 
 import { parseArgs } from "node:util";
 import { cwd, exit } from "node:process";
-import { glob } from "node:fs/promises";
-import { hashFile } from "@xan105/fs";
+//import { glob } from "node:fs/promises";
+import { hashFile, ls } from "@xan105/fs";
 
 async function compute(algo){
-  const files = glob(["**/*.node", "**/*.wasm"], { //node20: experimental 
-    cwd: cwd(), 
+  //const files = glob(["**/*.node", "**/*.wasm"], { //node20: experimental 
+  /*  cwd: cwd(), 
     exclude: (path) => path.includes("node_modules")
   });
-  for await (const file of files){
+  for await (const file of files){*/
+  
+  const files = await ls(cwd(), {
+    recursive: true,
+    ignore: { dir : true },
+    ext: ["node", "wasm"],
+    filter: ["node_modules"]
+  });
+  for (const file of files){
     const hash = await hashFile(file, { algo, base64: true });
     console.info({ path: file, algo, hash });
   }
